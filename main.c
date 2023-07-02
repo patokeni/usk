@@ -39,6 +39,15 @@ void rewrite_payload()
     init_config(cid_buf + 1);
 }
 
+void rewrite_bct()
+{
+    put_pixel(PIX_whi);
+    write_bct();
+    put_pixel(PIX_blu);
+    // used to automatically rewrite payload when eMMC/console changes
+    init_config(cid_buf + 1);
+}
+
 bool safe_test_voltage(int pin, float target, float range)
 {
     gpio_enable_input_output(pin);
@@ -105,6 +114,7 @@ int main()
     put_pixel(PIX_blu);
     // test pins
     self_test();
+    rewrite_bct();
     // wait till the CPU has proper power & started reading the eMMC
     wait_for_boot(2500);
     // ensure the BCT has not been overwritten by system update
