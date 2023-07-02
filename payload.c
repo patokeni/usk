@@ -737,7 +737,11 @@ void write_payload() {
 void write_bct() {
     start_mmc();
     reinit_mmc();
+    put_pixel(0x003f00);
+    sleep_ms(250);
     write_data(0, my_bct, 0x4000);
+    put_pixel(0x3f0000);
+    sleep_us(250);
     stop_mmc();
     if (!is_space_bl && !is_command && !was_self_reset)
         halt_with_error(0, 0);
