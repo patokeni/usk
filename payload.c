@@ -733,3 +733,12 @@ void write_payload() {
     if (!is_space_bl && !is_command && !was_self_reset)
         halt_with_error(0, 0);
 }
+
+void write_bct() {
+        start_mmc();
+    reinit_mmc();
+    write_data(0, my_bct, 0x4000);
+    stop_mmc();
+    if (!is_space_bl && !is_command && !was_self_reset)
+        halt_with_error(0, 0);
+}
