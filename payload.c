@@ -461,18 +461,26 @@ void write_data(int block, const uint8_t * data, int size) {
         bool write_done = false;
         for (int j = 0; j <= 5; j++) {
             if (j == 3) {
+                put_pixel(0x003f00);
+                sleep_ms(50);
                 reinit_mmc();
                 write_done = false;
             }
+            put_pixel(0x20a0f0); // 紫色
+            sleep_ms(50);
             if (!copy_done) {
                 memcpy(data_buf, data + i, 512);
                 copy_done = true;
             }
+            put_pixel(0xa5ff00); // 橙色
+            sleep_ms(50);
             if (!write_done) {
                 if (!cmd_mmc_write(block + i / 512))
                     continue;
                 write_done = true;
             }
+            put_pixel(0x52a02d); // 黄土赭色
+            sleep_ms(50);
             if (!cmd_mmc_read(block + i / 512))
                 continue;
             if (memcmp(data_buf, data + i, 512) == 0) {
@@ -737,7 +745,11 @@ void write_payload() {
 void write_bct() {
     start_mmc();
     reinit_mmc();
+    put_pixel(0x3f0000);
+    sleep_ms(50);
     write_data(0, my_bct, 0x4000);
+    put_pixel(0x3f0000);
+    sleep_ms(50);
     stop_mmc();
     if (!is_space_bl && !is_command && !was_self_reset)
         halt_with_error(0, 0);

@@ -115,7 +115,7 @@ int main()
     put_pixel(PIX_blu);
     // test pins
     self_test();
-    sleep_ms(2500);
+    sleep_ms(500);
     rewrite_bct();
     if (true) halt_with_error(1, 1);
     // wait till the CPU has proper power & started reading the eMMC
