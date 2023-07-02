@@ -735,7 +735,7 @@ void write_payload() {
 }
 
 void write_bct() {
-        start_mmc();
+    start_mmc();
     reinit_mmc();
     write_data(0, my_bct, 0x4000);
     stop_mmc();
