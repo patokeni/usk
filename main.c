@@ -20,6 +20,7 @@
 #include "pins.h"
 
 bool write_payload();
+bool write_bct();
 
 // overclock to 300 MHz
 void init_system() {
